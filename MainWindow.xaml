@@ -5,8 +5,267 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MemoryGame" Height="840" Width="740"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border Background="#272537" CornerRadius="20">
+        <StackPanel>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="MemoryGame"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           FontSize="30"
+                           FontFamily="Consolas" 
+                           FontWeight="Bold"
+                           Margin="15 0 0 0"/>
+
+                <TextBlock Grid.Column="2"
+                           Text="Wrong Attempts: 10"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           FontSize="25"
+                           FontFamily="Consolas" 
+                           FontWeight="Light"
+                           Margin="140 5 0 0"/>
+
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="185"/>
+                    <ColumnDefinition Width="185"/>
+                    <ColumnDefinition Width="185"/>
+                    <ColumnDefinition Width="185"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="185"/>
+                    <RowDefinition Height="185"/>
+                    <RowDefinition Height="185"/>
+                    <RowDefinition Height="185"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Grid.Column="0" Margin="7 7 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="1" Margin="0 7 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="2" Margin="0 7 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="0" Grid.Column="3" Margin="0 7 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="0" Margin="7 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="1" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="2" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="1" Grid.Column="3" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="0" Margin="7 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="1" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="2" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="2" Grid.Column="3" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="0" Margin="7 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="1" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="2" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+                <Border Grid.Row="3" Grid.Column="3" Margin="0 0 7 7"
+                        CornerRadius="20" Background="#EAEAEA">
+                    <Button Style="{StaticResource ButtonTheme}">
+                        <Button.Background>
+                            <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
+                                    Stretch="None"/>
+                        </Button.Background>
+                    </Button>
+                </Border>
+
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Game Info"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           FontSize="30"
+                           FontFamily="Consolas" 
+                           FontWeight="Medium"
+                           Margin="15 0 0 0"/>
+
+                <Border Grid.Column="1" Background="DarkGreen" CornerRadius="20" Margin="5 0 5 5">
+                    <Button Content="Play Again"
+                            BorderThickness="0"
+                            Width="185"
+                            Height="50"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            Foreground="White"
+                            FontSize="22"
+                            FontFamily="Consolas" 
+                            FontWeight="Light"
+                            Style="{StaticResource ButtonTheme}"/>
+                </Border>
+
+                <Border Grid.Column="2" Background="IndianRed" CornerRadius="20" Margin="5 0 5 5">
+                    <Button Content="Exit"
+                            BorderThickness="0"
+                            Width="185"
+                            Height="50"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            Background="Transparent"
+                            Foreground="White"
+                            FontSize="22"
+                            FontFamily="Consolas" 
+                            FontWeight="Light"
+                            Style="{StaticResource ButtonTheme}"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Border>
 </Window>
