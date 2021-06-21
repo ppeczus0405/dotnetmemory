@@ -26,19 +26,19 @@
                 <TextBlock Text="MemoryGame"
                            VerticalAlignment="Center"
                            Foreground="White"
-                           FontSize="30"
+                           FontSize="40"
                            FontFamily="Consolas" 
                            FontWeight="Bold"
-                           Margin="15 0 0 0"/>
+                           Margin="15 7 0 0"/>
 
                 <TextBlock Grid.Column="2"
-                           Text="Wrong Attempts: 10"
+                           Text="Mistakes: 10"
                            VerticalAlignment="Center"
-                           Foreground="White"
-                           FontSize="25"
+                           Foreground="OrangeRed"
+                           FontSize="40"
                            FontFamily="Consolas" 
                            FontWeight="Light"
-                           Margin="140 5 0 0"/>
+                           Margin="120 7 0 0"/>
 
             </Grid>
             <Grid>
@@ -228,13 +228,13 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Game Info"
+                <TextBlock Text="Game starts!"
                            VerticalAlignment="Center"
                            Foreground="White"
                            FontSize="30"
                            FontFamily="Consolas" 
                            FontWeight="Medium"
-                           Margin="15 0 0 0"/>
+                           Margin="15 0 0 7"/>
 
                 <Border Grid.Column="1" Background="DarkGreen" CornerRadius="20" Margin="5 0 5 5">
                     <Button Content="Play Again"

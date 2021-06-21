@@ -102,12 +102,12 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include=".gitignore" />
-    <Resource Include="resources\qmark.png" />
     <Resource Include="resources\apple.png" />
     <Resource Include="resources\kiwi.png" />
     <Resource Include="resources\lemon.png" />
     <Resource Include="resources\onion.png" />
     <Resource Include="resources\orange.png" />
+    <Resource Include="resources\qmark.png" />
     <Resource Include="resources\raspberry.png" />
     <Resource Include="resources\strawberry.png" />
     <Resource Include="resources\tomato.png" />
