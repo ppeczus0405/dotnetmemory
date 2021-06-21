@@ -31,7 +31,8 @@
                            FontWeight="Bold"
                            Margin="15 7 0 0"/>
 
-                <TextBlock Grid.Column="2"
+                <TextBlock Name="mistakes"
+                           Grid.Column="2"
                            Text="Mistakes: 10"
                            VerticalAlignment="Center"
                            Foreground="OrangeRed"
@@ -58,7 +59,7 @@
 
                 <Border Grid.Row="0" Grid.Column="0" Margin="7 7 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem00" Click="mem00Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -68,7 +69,7 @@
 
                 <Border Grid.Row="0" Grid.Column="1" Margin="0 7 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem01" Click="mem01Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -78,7 +79,7 @@
 
                 <Border Grid.Row="0" Grid.Column="2" Margin="0 7 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem02" Click="mem02Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -88,7 +89,7 @@
 
                 <Border Grid.Row="0" Grid.Column="3" Margin="0 7 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem03" Click="mem03Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -98,7 +99,7 @@
 
                 <Border Grid.Row="1" Grid.Column="0" Margin="7 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem10" Click="mem10Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -108,7 +109,7 @@
 
                 <Border Grid.Row="1" Grid.Column="1" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem11" Click="mem11Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -118,7 +119,7 @@
 
                 <Border Grid.Row="1" Grid.Column="2" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem12" Click="mem12Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -128,7 +129,7 @@
 
                 <Border Grid.Row="1" Grid.Column="3" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem13" Click="mem13Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -138,7 +139,7 @@
 
                 <Border Grid.Row="2" Grid.Column="0" Margin="7 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem20" Click="mem20Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -148,7 +149,7 @@
 
                 <Border Grid.Row="2" Grid.Column="1" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem21" Click="mem21Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -158,7 +159,7 @@
 
                 <Border Grid.Row="2" Grid.Column="2" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem22" Click="mem22Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -168,7 +169,7 @@
 
                 <Border Grid.Row="2" Grid.Column="3" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem23" Click="mem23Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -178,7 +179,7 @@
 
                 <Border Grid.Row="3" Grid.Column="0" Margin="7 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem30" Click="mem30Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -188,7 +189,7 @@
 
                 <Border Grid.Row="3" Grid.Column="1" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem31" Click="mem31Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -198,7 +199,7 @@
 
                 <Border Grid.Row="3" Grid.Column="2" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem32" Click="mem32Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -208,7 +209,7 @@
 
                 <Border Grid.Row="3" Grid.Column="3" Margin="0 0 7 7"
                         CornerRadius="20" Background="#EAEAEA">
-                    <Button Style="{StaticResource ButtonTheme}">
+                    <Button Name="mem33" Click="mem33Click" Style="{StaticResource ButtonTheme}">
                         <Button.Background>
                             <ImageBrush ImageSource="pack://application:,,,/Memory;component/resources/qmark.png" 
                                     Stretch="None"/>
@@ -228,7 +229,8 @@
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Game starts!"
+                <TextBlock Name="gameInfo"
+                           Text="Game starts!"
                            VerticalAlignment="Center"
                            Foreground="White"
                            FontSize="30"
@@ -237,7 +239,9 @@
                            Margin="15 0 0 7"/>
 
                 <Border Grid.Column="1" Background="DarkGreen" CornerRadius="20" Margin="5 0 5 5">
-                    <Button Content="Play Again"
+                    <Button Name="play"
+                            Click="playClick"
+                            Content="Play Again"
                             BorderThickness="0"
                             Width="185"
                             Height="50"
@@ -252,7 +256,9 @@
                 </Border>
 
                 <Border Grid.Column="2" Background="IndianRed" CornerRadius="20" Margin="5 0 5 5">
-                    <Button Content="Exit"
+                    <Button Name="exit"
+                            Click="exitClick"
+                            Content="Exit"
                             BorderThickness="0"
                             Width="185"
                             Height="50"
