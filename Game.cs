@@ -31,89 +31,169 @@ namespace Memory
                 list[n] = value;
             }
         }
-    }
-
-    public class Game
-    {
-        private const string resourcePath = "pack://application:,,,/Memory;component/resources/";
-        private const string questionMark = "qmark.png";
-        private const string memButtonPrefix = "mem";
-        private const int memDim = 4;
-        private readonly Color normalMemButtonColor = Color.FromRgb(0xEA, 0xEA, 0xEA);
-        private readonly Color pressedMemButtonColor = Color.FromRgb(0xFF, 0xFF, 0xFF);
-        private int[,] gameArray;
-        private int pressedFields;
-        MainWindow mWindow;
-
-        public Game(MainWindow w)
+        public static List<int> getRandomList(int dim)
         {
-            mWindow = w;
-            pressedFields = 0;
-            gameArray = new int[memDim, memDim];
-            fillGameArray();
-        }
-        private void succesMatch(Tuple<int, int> f, Tuple<int, int> s)
-        {
-
-        }
-        private List<int> getRandom()
-        {
-            var result = new List<int>(memDim * memDim);
-            for(int i = 0; i < memDim * memDim; i++){
-                result.Add(i % (memDim * memDim) / 2);
+            int dimSquare = dim * dim;
+            var result = new List<int>(dimSquare);
+            for (int i = 0; i < dimSquare; i++){
+                result.Add(i % (dimSquare / 2));
             }
             result.Shuffle();
             return result;
         }
-        private void fillGameArray()
+    }
+
+    public class Game
+    {    
+        // Readonly, const values
+        private const string resourcePath = "pack://application:,,,/Memory;component/resources/";
+        private const string mistakesText = "Mistakes: ";
+        private const string questionMark = "qmark.png";
+        private const string memButtonPrefix = "mem";
+        private const int memDim = 4;
+        private const int waitTime = 2000;
+        private readonly Color normalMemButtonColor = Color.FromRgb(0xEA, 0xEA, 0xEA);
+        private readonly Color pressedMemButtonColor = Color.FromRgb(0xFF, 0xFF, 0xFF);
+        
+        // Additional types declaration
+        enum GameState {StartGame, RightMatch, WrongMatch, EndGame}
+
+        // Game state variables
+         
+        private int[,] gameArray;
+        private int mistakes;
+        private int guessedPairs;
+        private List <Tuple<int, int> > pressedFields;
+        private GameState actualState;
+        private MainWindow mWindow;
+        private Dictionary<GameState, Tuple<string, Color>> stateDict;
+
+        public Game(MainWindow w)
         {
-            List<int> randomList = getRandom();
-            for(int i = 0; i < memDim; i++){
-                for(int j = 0; j < memDim; j++){
-                    gameArray[i,j] = randomList[i * memDim + j];
+            mWindow = w;
+            pressedFields = new List<Tuple<int, int>>();
+            actualState = GameState.StartGame;
+            mistakes = 0;
+            guessedPairs = 0;
+            initializeGameArray();
+            initializeStateDict();
+        }
+        private void initializeGameArray()
+        {
+            gameArray = new int[memDim, memDim];
+            List<int> randomList = MyExtensions.getRandomList(memDim);
+            for (int i = 0; i < memDim; i++) { 
+                for (int j = 0; j < memDim; j++) {
+                    gameArray[i, j] = randomList[i * memDim + j];
                 }
             }
         }
-        private void fieldChangeToPressed(Tuple<int, int> field, bool pressed)
+        private void initializeStateDict()
+        {
+            stateDict = new Dictionary<GameState, Tuple<string, Color>>();
+            stateDict.Add(GameState.StartGame, Tuple.Create("Game starts! Stay focused.", Color.FromRgb(0xFF, 0xFF, 0xCC)));
+            stateDict.Add(GameState.RightMatch, Tuple.Create("Succesfully matched!", Color.FromRgb(0x99, 0xFF, 0x66)));
+            stateDict.Add(GameState.WrongMatch, Tuple.Create("Wrong matched. Don't give up!", Color.FromRgb(0xFF, 0x66, 0x00)));
+            stateDict.Add(GameState.EndGame, Tuple.Create("You guessed all cards.", Color.FromRgb(0xCC, 0xFF, 0xFF)));
+        }
+        private Button getButton(Tuple<int, int> field)
         {
             string fieldName = memButtonPrefix + field.Item1.ToString() + field.Item2.ToString();
-            object wantedNode = mWindow.mainStackPanel.FindName(fieldName);
-            if(wantedNode is Button)
-            {
-                // Border Background
-                var parentBorder = (Border)VisualTreeHelper.GetParent((DependencyObject)wantedNode);
-                parentBorder.Background = new SolidColorBrush(pressed ? pressedMemButtonColor : normalMemButtonColor);
-                // Button image
-                Button update = (Button)wantedNode;
-                string imgName = pressed ? gameArray[field.Item1, field.Item2].ToString() + ".png" : questionMark;
-                string imgPath = resourcePath + imgName;
-                var imgBrush = new ImageBrush(new BitmapImage(new Uri(imgPath)));
-                imgBrush.Stretch = Stretch.None;
-                string styleName = pressed ? "MemPressedTheme" : "ButtonTheme";
-                update.Background = imgBrush;
-                update.Style = (Style)App.Current.Resources[styleName];
-            }
+            return (Button)mWindow.mainStackPanel.FindName(fieldName);
         }
-        public void displayTable()
+        private bool fieldChangeToPressed(Tuple<int, int> field, bool pressed)
         {
-            for(int i = 0; i < memDim; i++){
-                for(int j = 0; j < memDim; j++){
-                    System.Console.Write(gameArray[i, j].ToString() + " ");
-                }
-                System.Console.WriteLine();
-            }
+            if (pressed && (pressedFields.Count > 1 || pressedFields.Contains(field)))
+                return false;
+            
+            Button wantedButton = getButton(field);
+            // Border Background
+            var parentBorder = (Border)VisualTreeHelper.GetParent((DependencyObject)wantedButton);
+            parentBorder.Background = new SolidColorBrush(pressed ? pressedMemButtonColor : normalMemButtonColor);
+                
+            // Button image
+            string imgName = pressed ? gameArray[field.Item1, field.Item2].ToString() + ".png" : questionMark;
+            string imgPath = resourcePath + imgName;
+            var imgBrush = new ImageBrush(new BitmapImage(new Uri(imgPath)));
+            imgBrush.Stretch = Stretch.None;
+            string styleName = pressed ? "MemPressedTheme" : "ButtonTheme";
+            wantedButton.Background = imgBrush;
+            wantedButton.Style = (Style)App.Current.Resources[styleName];
+            return true;
         }
+        private void changeState(GameState toChange)
+        {
+            // Nothing to change
+            if (actualState == toChange)
+                return;
+
+            var statePair = stateDict[toChange];
+            string stateDescription = statePair.Item1;
+            Color descriptionColor = statePair.Item2;
+            mWindow.gameInfo.Text = stateDescription;
+            mWindow.gameInfo.Foreground = new SolidColorBrush(descriptionColor);
+            actualState = toChange;
+        }
+        private void incrementMistakes()
+        {
+            mistakes++;
+            mWindow.mistakes.Text = mistakesText + mistakes.ToString();
+        }
+        private async void rightMatch()
+        {
+            changeState(GameState.RightMatch);
+            await Task.Delay(waitTime);
+            unpressRight();
+        }
+        private void unpressRight()
+        {
+            Button firstField = getButton(pressedFields[0]);
+            Button secondField = getButton(pressedFields[1]);
+            var borderFirst = (Border)VisualTreeHelper.GetParent((DependencyObject)firstField);
+            var borderSecond = (Border)VisualTreeHelper.GetParent((DependencyObject)secondField);
+            borderFirst.Background = Brushes.Transparent;
+            borderSecond.Background = Brushes.Transparent;
+            firstField.Background = Brushes.Transparent;
+            secondField.Background = Brushes.Transparent;
+            firstField.IsEnabled = false;
+            secondField.IsEnabled = false;
+            pressedFields.Clear();
+        }
+        private async void wrongMatch()
+        {
+            incrementMistakes();
+            changeState(GameState.WrongMatch);
+            await Task.Delay(waitTime);
+            unpressWrong();
+        }
+        private void unpressWrong()
+        {
+            fieldChangeToPressed(pressedFields[0], false);
+            fieldChangeToPressed(pressedFields[1], false);
+            pressedFields.Clear();
+        }
+        private bool isMatched()
+        {
+            return pressedFields.Count == 2 &&
+                   gameArray[pressedFields[0].Item1, pressedFields[0].Item2] == 
+                   gameArray[pressedFields[1].Item1, pressedFields[1].Item2];
+        }
+        private void handlePressedField(Tuple <int, int> field)
+        {
+            pressedFields.Add(field);
+            if (pressedFields.Count == 1) 
+                return;
+            if (isMatched()) rightMatch();
+            else wrongMatch();
+
+        }
+
         public void updateButton(int i, int j)
         {
-            pressedFields++;
-            if (pressedFields <= 16)
-            {
-                fieldChangeToPressed(Tuple.Create(i, j), true);
-            }
-            else
-            {
-                fieldChangeToPressed(Tuple.Create(i, j), false);
-            }
+            Tuple<int, int> fieldToUpdate = Tuple.Create(i, j);
+            bool succesPressed = fieldChangeToPressed(fieldToUpdate, true);
+            if (succesPressed)
+                handlePressedField(fieldToUpdate);
         }
     }
 }
