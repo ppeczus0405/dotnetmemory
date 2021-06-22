@@ -26,93 +26,23 @@ namespace Memory
             InitializeComponent();
             game = new Game(this);
         }
-        private void exitClick(object sender, RoutedEventArgs e)
-        {
-            App.Current.Shutdown();
-        }
-        private void playClick(object sender, RoutedEventArgs e)
-        {
-            game.displayTable();
-        }
-        private void mem00Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem01Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem02Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem03Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem10Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem11Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem12Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem13Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem20Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem21Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem22Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem23Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem30Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem31Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem32Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
-        private void mem33Click(object sender, RoutedEventArgs e)
-        {
-            Button s = (Button)sender;
-            System.Console.WriteLine(s.Name);
-        }
+        private void exitClick(object sender, RoutedEventArgs e) => App.Current.Shutdown();
+        private void playClick(object sender, RoutedEventArgs e) => game.displayTable();
+        private void mem00Click(object sender, RoutedEventArgs e) => game.updateButton(0, 0);
+        private void mem01Click(object sender, RoutedEventArgs e) => game.updateButton(0, 1);
+        private void mem02Click(object sender, RoutedEventArgs e) => game.updateButton(0, 2);
+        private void mem03Click(object sender, RoutedEventArgs e) => game.updateButton(0, 3);
+        private void mem10Click(object sender, RoutedEventArgs e) => game.updateButton(1, 0);
+        private void mem11Click(object sender, RoutedEventArgs e) => game.updateButton(1, 1);
+        private void mem12Click(object sender, RoutedEventArgs e) => game.updateButton(1, 2);
+        private void mem13Click(object sender, RoutedEventArgs e) => game.updateButton(1, 3);
+        private void mem20Click(object sender, RoutedEventArgs e) => game.updateButton(2, 0);
+        private void mem21Click(object sender, RoutedEventArgs e) => game.updateButton(2, 1);
+        private void mem22Click(object sender, RoutedEventArgs e) => game.updateButton(2, 2);
+        private void mem23Click(object sender, RoutedEventArgs e) => game.updateButton(2, 3);
+        private void mem30Click(object sender, RoutedEventArgs e) => game.updateButton(3, 0);
+        private void mem31Click(object sender, RoutedEventArgs e) => game.updateButton(3, 1);
+        private void mem32Click(object sender, RoutedEventArgs e) => game.updateButton(3, 2);
+        private void mem33Click(object sender, RoutedEventArgs e) => game.updateButton(3, 3);
     }
 }

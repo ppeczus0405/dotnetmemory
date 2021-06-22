@@ -12,7 +12,7 @@
         Background="Transparent"
         AllowsTransparency="True">
     <Border Background="#272537" CornerRadius="20">
-        <StackPanel>
+        <StackPanel Name="mainStackPanel">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"/>
