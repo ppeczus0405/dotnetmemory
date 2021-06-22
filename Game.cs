@@ -59,10 +59,11 @@ namespace Memory
         enum GameState {StartGame, RightMatch, WrongMatch, EndGame}
 
         // Game state variables
-         
+
+        private bool restartButtonActivated;
         private int[,] gameArray;
         private int mistakes;
-        private int guessedPairs;
+        private int matchedPairs;
         private List <Tuple<int, int> > pressedFields;
         private GameState actualState;
         private MainWindow mWindow;
@@ -71,16 +72,17 @@ namespace Memory
         public Game(MainWindow w)
         {
             mWindow = w;
+            gameArray = new int[memDim, memDim];
             pressedFields = new List<Tuple<int, int>>();
             actualState = GameState.StartGame;
             mistakes = 0;
-            guessedPairs = 0;
-            initializeGameArray();
+            matchedPairs = 0;
+            restartButtonActivated = false;
+            fillGameArray();
             initializeStateDict();
         }
-        private void initializeGameArray()
+        private void fillGameArray()
         {
-            gameArray = new int[memDim, memDim];
             List<int> randomList = MyExtensions.getRandomList(memDim);
             for (int i = 0; i < memDim; i++) { 
                 for (int j = 0; j < memDim; j++) {
@@ -94,7 +96,7 @@ namespace Memory
             stateDict.Add(GameState.StartGame, Tuple.Create("Game starts! Stay focused.", Color.FromRgb(0xFF, 0xFF, 0xCC)));
             stateDict.Add(GameState.RightMatch, Tuple.Create("Succesfully matched!", Color.FromRgb(0x99, 0xFF, 0x66)));
             stateDict.Add(GameState.WrongMatch, Tuple.Create("Wrong matched. Don't give up!", Color.FromRgb(0xFF, 0x66, 0x00)));
-            stateDict.Add(GameState.EndGame, Tuple.Create("You guessed all cards.", Color.FromRgb(0xCC, 0xFF, 0xFF)));
+            stateDict.Add(GameState.EndGame, Tuple.Create("Nice! You guessed all cards.", Color.FromRgb(0xCC, 0xFF, 0xFF)));
         }
         private Button getButton(Tuple<int, int> field)
         {
@@ -103,7 +105,7 @@ namespace Memory
         }
         private bool fieldChangeToPressed(Tuple<int, int> field, bool pressed)
         {
-            if (pressed && (pressedFields.Count > 1 || pressedFields.Contains(field)))
+            if (!restartButtonActivated && pressed && (pressedFields.Count > 1 || pressedFields.Contains(field)))
                 return false;
             
             Button wantedButton = getButton(field);
@@ -144,6 +146,9 @@ namespace Memory
             changeState(GameState.RightMatch);
             await Task.Delay(waitTime);
             unpressRight();
+            matchedPairs++;
+            if (isGameEnd())
+                changeState(GameState.EndGame);
         }
         private void unpressRight()
         {
@@ -154,8 +159,8 @@ namespace Memory
             borderFirst.Background = Brushes.Transparent;
             borderSecond.Background = Brushes.Transparent;
             firstField.Background = Brushes.Transparent;
-            secondField.Background = Brushes.Transparent;
             firstField.IsEnabled = false;
+            secondField.Background = Brushes.Transparent;
             secondField.IsEnabled = false;
             pressedFields.Clear();
         }
@@ -187,7 +192,47 @@ namespace Memory
             else wrongMatch();
 
         }
+        private bool isGameEnd()
+        {
+            return matchedPairs == memDim * memDim / 2;
+        }
+        public void endGame()
+        {
+            App.Current.Shutdown();
+        }
+        public async void restartGame()
+        {
+            if (restartButtonActivated)
+                return;
+            // Wait for end of other functions
+            restartButtonActivated = true;
+            await Task.Delay(waitTime);
 
+            mistakes = -1;
+            matchedPairs = 0;
+            pressedFields.Clear();
+
+            fillGameArray();
+            incrementMistakes();
+            changeState(GameState.StartGame);
+
+            for (int i = 0; i < memDim; i++)
+            {
+                for (int j = 0; j < memDim; j++)
+                {
+                    Button actBut = getButton(Tuple.Create(i, j));
+                    actBut.IsEnabled = true;
+                    actBut.Style = (Style)App.Current.Resources["ButtonTheme"];
+                    var imgBrush = new ImageBrush(new BitmapImage(new Uri(resourcePath + questionMark)));
+                    imgBrush.Stretch = Stretch.None;
+                    actBut.Background = imgBrush;
+
+                    var border = (Border)VisualTreeHelper.GetParent((DependencyObject)actBut);
+                    border.Background = new SolidColorBrush(normalMemButtonColor);
+                }
+            }
+            restartButtonActivated = false;
+        }
         public void updateButton(int i, int j)
         {
             Tuple<int, int> fieldToUpdate = Tuple.Create(i, j);

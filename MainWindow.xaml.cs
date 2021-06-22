@@ -23,8 +23,8 @@ namespace Memory
             InitializeComponent();
             game = new Game(this);
         }
-        private void exitClick(object sender, RoutedEventArgs e) => App.Current.Shutdown();
-        private void playClick(object sender, RoutedEventArgs e) => App.Current.Shutdown();
+        private void exitClick(object sender, RoutedEventArgs e) => game.endGame();
+        private void playClick(object sender, RoutedEventArgs e) => game.restartGame();
         private void mem00Click(object sender, RoutedEventArgs e) => game.updateButton(0, 0);
         private void mem01Click(object sender, RoutedEventArgs e) => game.updateButton(0, 1);
         private void mem02Click(object sender, RoutedEventArgs e) => game.updateButton(0, 2);

@@ -1,1 +1,1 @@
-﻿Memory game using C# .NET WPF
+﻿Memory game using WPF C# .NET 4.7.2 for Windows platforms. Project created using Visual Studio.
